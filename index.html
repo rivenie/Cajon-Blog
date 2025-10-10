@@ -13,6 +13,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- Header -->
@@ -39,35 +45,54 @@
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-      <div class="container hero-content">
-        <h1>
-          Transformamos tus datos en dashboards claros para tomar decisiones
-        </h1>
-        <p>
-          Visualiza y analiza tus datos de manera intuitiva con nuestros
-          dashboards en Power BI, facilitando la toma de decisiones estratégicas
-          para tu negocio.
-        </p>
-        <a href="#contacto" class="btn">Contáctanos</a>
+      <div class="color-overlay">
+        <div class="container hero-content">
+          <div class="hero-image">
+            <img src="img/pantalla-inicial.png" alt="Dashboard Power BI" />
+          </div>
+          <div class="hero-text">
+            <h1>Mucho más que un <strong>Dashboard</strong></h1>
+            <p>
+              Los dashboards de Jamber son mucho más que un simple Dashboard que
+              representa información gráfica de un determinado hecho.
+              <br />
+              <br />
+              No sólo porque permiten relacionar
+              <strong>toda la información</strong> de la organización de forma
+              sintética y clara, sino porque además, permite profundizar desde
+              el gráfico o el indicador hasta el más mínimo detalle sin importar
+              el origen del dato.
+            </p>
+            <div class="btn-container">
+              <a
+                href="https://wa.me/51950203355?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Jamber"
+                class="btn"
+                target="_blank"
+                >Contáctanos</a
+              >
+              <a href="#dashboards" class="btn btn-secondary">Conoce más</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-
     <!-- Services Section -->
     <section class="services-section parallax-bg" id="servicios">
       <div class="container">
-        <h2 class="section-title">Nuestros Servicios de Dashboards</h2>
+        <h2 class="section-title">El Dashboard perfecto para su empresa</h2>
 
         <div class="services-grid">
           <!-- Servicio 1 -->
           <div class="service-item">
             <div class="service-icon">
-              <i class="fas fa-code"></i>
+              <i class="fa-solid fa-cloud"></i>
             </div>
             <div class="service-content">
-              <h3>Programación avanzada</h3>
+              <h3>Desde cualquier lugar</h3>
               <p>
-                Desarrollamos fórmulas y funciones específicas para crear los
-                KPIs que realmente necesitas visualizar.
+                Accede desde cualquier navegador a toda la información necesaria
+                para tomar decisiones, sin necesidad de instalar nada en el
+                cliente.
               </p>
             </div>
           </div>
@@ -75,13 +100,14 @@
           <!-- Servicio 2 -->
           <div class="service-item">
             <div class="service-icon">
-              <i class="fas fa-table"></i>
+              <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <div class="service-content">
-              <h3>Tablas Personalizadas</h3>
+              <h3>Ver el detalle</h3>
               <p>
-                Estudiamos a fondo el diseño y visualización del dashboard para
-                interpretar fácilmente la información que estamos presentando.
+                Permite profundizar en el análisis de los indicadores, motivos,
+                tendencias, distribución, ... abriendo cualquiera de los
+                Documentos Analíticos de Atlas SBI.
               </p>
             </div>
           </div>
@@ -89,15 +115,14 @@
           <!-- Servicio 3 -->
           <div class="service-item">
             <div class="service-icon">
-              <i class="fas fa-plug"></i>
+              <i class="fa-solid fa-chart-pie"></i>
             </div>
             <div class="service-content">
-              <h3>Integraciones avanzadas</h3>
+              <h3>No sólo gráficos</h3>
               <p>
-                Usamos conectores avanzados de Supermetrics para integrar todas
-                las plataformas en un solo dashboard, incluso podemos mezclar
-                fuentes de datos para tener un panorama completo de tu
-                estrategia.
+                La flexibilidad de Atlas SBI permite definir dashboards que
+                incluyan potentes elementos de análisis como tablas dinámicas o
+                análisis periódicos.
               </p>
             </div>
           </div>
@@ -105,13 +130,13 @@
           <!-- Servicio 4 (Nuevo) -->
           <div class="service-item">
             <div class="service-icon">
-              <i class="fas fa-chart-line"></i>
+              <i class="fa-solid fa-table"></i>
             </div>
             <div class="service-content">
-              <h3>Visualización de Datos</h3>
+              <h3>Integración total</h3>
               <p>
-                Transformamos datos complejos en gráficos interactivos y fáciles
-                de entender que facilitan la toma de decisiones estratégicas.
+                Además del Dashboard, integra todas las herramientas necesarias:
+                Reporting dinámico, Cuadros de mando, Tablas dinámicas, ...
               </p>
             </div>
           </div>
@@ -119,13 +144,29 @@
           <!-- Servicio 5 (Nuevo) -->
           <div class="service-item">
             <div class="service-icon">
-              <i class="fas fa-cogs"></i>
+              <i class="fa-solid fa-dollar-sign"></i>
             </div>
             <div class="service-content">
-              <h3>Automatización de Reportes</h3>
+              <h3>Rápida implantación</h3>
               <p>
-                Automatizamos la actualización de tus dashboards para que
-                siempre tengas información en tiempo real sin esfuerzo manual.
+                Elimina la complejidad intrínseca de los sistemas tradicionales
+                para ofrecer un sistema disponible en mucho menos tiempo que
+                cualquier otro BI.
+              </p>
+            </div>
+          </div>
+
+          <!-- Servicio 6 (Nuevo) -->
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fa-solid fa-sliders"></i>
+            </div>
+            <div class="service-content">
+              <h3>Totalmente personalizable</h3>
+              <p>
+                Permite definir tus propias perspectivas, la forma de ver la
+                información, o determinar qué indicadores se cargan
+                automáticamente.
               </p>
             </div>
           </div>
@@ -134,9 +175,75 @@
         <div class="services-cta">
           <p class="cta-text">
             ¿Necesitas una solución personalizada?
-            <a href="#contacto">Contáctanos</a> para crear el dashboard perfecto
-            para tu negocio
+            <a
+              href="https://wa.me/51950203355?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Jamber"
+              target="_blank"
+              >Contáctanos</a
+            >
+            para crear el dashboard perfecto para tu negocio
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de dashboard potentes -->
+
+    <section class="features-section">
+      <div class="container features-content">
+        <!-- Columna izquierda con texto e íconos -->
+        <div class="features-text">
+          <h2 class="features-title">Dashboards más potentes</h2>
+          <div class="title-underline"></div>
+
+          <!-- Texto adicional debajo de la raya azul -->
+          <p class="features-intro">
+            La combinación de los eleméntos típicos de Dashboards junto con
+            otros propios del reporting o del análisis OLAP permiten a Atlas SBI
+            la creación de Dashboards mucho más potentes.
+          </p>
+
+          <!-- Primer elemento con ícono -->
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Aquí pondrás tu primer ícono -->
+              <div class="service-icon">
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <div class="feature-content">
+              <h3 class="feature-subtitle">Todo tipo de elementos gráficos</h3>
+              <p class="feature-description">
+                Potentes gráficos, indicadores de tendencia, semáforos, gauges y
+                todos los elementos necesarios para un análisis rápido.
+              </p>
+            </div>
+          </div>
+
+          <!-- Segundo elemento con ícono -->
+          <div class="feature-item">
+            <div class="feature-icon">
+              <!-- Aquí pondrás tu segundo ícono -->
+              <div class="service-icon">
+                <i class="fa-solid fa-pencil"></i>
+              </div>
+            </div>
+            <div class="feature-content">
+              <h3 class="feature-subtitle">
+                Integración de elementos de análisis
+              </h3>
+              <p class="feature-description">
+                Los dashboards de Atlas SBI permiten incorporar elementos de
+                análisis como tablas dinámicas, comparativas periódicas, tablas
+                de datos para analizar la información en detalle de forma
+                flexible.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha con imagen -->
+        <div class="features-image">
+          <img src="img/pantalla-inicial02.png" alt="Dashboard Power BI" />
         </div>
       </div>
     </section>
@@ -148,6 +255,41 @@
 
         <div class="carousel-container">
           <div class="carousel">
+            <!-- Dashboard Estándar -->
+            <div class="post-card">
+              <div
+                class="post-image"
+                style="background-image: url('img/Estándar.png')"
+                data-image="img/Estándar.png"
+              ></div>
+              <div class="post-content">
+                <h3 class="post-title">Dashboard Estándar</h3>
+                <p class="post-excerpt">
+                  6 gráficas profesionales con diseño claro y funcional.
+                </p>
+                <span class="read-more view-image"
+                  >Ver más <i class="fas fa-arrow-right"></i
+                ></span>
+              </div>
+            </div>
+            <!-- Dashboard Avanzado -->
+            <div class="post-card">
+              <div
+                class="post-image"
+                style="background-image: url('img/Avanzado.png')"
+                data-image="img/Avanzado.png"
+              ></div>
+              <div class="post-content">
+                <h3 class="post-title">Dashboard Avanzado</h3>
+                <p class="post-excerpt">
+                  10 gráficas detalladas con alertas automáticas y seguimiento
+                  de metas mensuales.
+                </p>
+                <span class="read-more view-image"
+                  >Ver más <i class="fas fa-arrow-right"></i
+                ></span>
+              </div>
+            </div>
             <!-- Dashboard 1 -->
             <div class="post-card">
               <div
@@ -312,21 +454,39 @@
           <form id="contactForm">
             <div class="form-group">
               <label for="name">Razón Social / Nombres y Apellidos *</label>
-              <input type="text" id="name" class="form-control" required />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+              />
             </div>
 
             <div class="form-group">
               <label for="email">Correo Electrónico *</label>
-              <input type="email" id="email" class="form-control" required />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+              />
             </div>
 
             <div class="form-group">
               <label for="phone">Celular</label>
-              <input type="tel" id="phone" class="form-control" />
+              <input type="tel" id="phone" name="phone" class="form-control" />
             </div>
+
             <div class="form-group">
               <label for="message">Cuéntanos sobre tu proyecto *</label>
-              <textarea id="message" class="form-control" required></textarea>
+              <textarea
+                id="message"
+                name="message"
+                class="form-control"
+                required
+              ></textarea>
             </div>
 
             <button type="submit" class="btn">Enviar mensaje</button>
@@ -334,6 +494,18 @@
         </div>
       </div>
     </section>
+
+    <!-- WhatsApp flotante -->
+    <a
+      href="https://wa.me/51950203355?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Jamber"
+      class="whatsapp-float"
+      id="whatsappFloat"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chatear por WhatsApp con Jamber"
+    >
+      <img src="img/wpp.png" alt="WhatsApp Jamber" class="whatsapp-icon" />
+    </a>
 
     <!-- Footer -->
     <footer>

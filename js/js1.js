@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", function () {
     const header = document.querySelector("header");
     if (window.scrollY > 100) {
-      header.style.background = "rgba(255, 255, 255, 0.97)";
-      header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.08)";
+      header.style.background = "rgba(255, 255, 255, 0.80)";
+      header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.05)";
     } else {
       header.style.background =
         "linear-gradient(to right, #fff 80%, #f8f9fa 20%)";
@@ -261,5 +261,56 @@ document.addEventListener("DOMContentLoaded", function () {
       createDots();
       goToSlide(currentIndex);
     }, 250);
+  });
+
+  // Formulario con pura finta
+const contactFormu = document.getElementById("contactForm");
+
+if (contactFormu) {
+  contactFormu.addEventListener("submit", function (e) {
+    e.preventDefault();
+    
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    // Efecto de "enviando" más realista
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.7';
+    
+    // Simular tiempo de envío (2 segundos)
+    setTimeout(() => {
+      // Mensaje de éxito
+      alert("✅ ¡Mensaje enviado con éxito!\n\nTe contactaremos dentro de las próximas 24 horas.");
+      
+      // Resetear formulario
+      contactFormu.reset();
+      
+      // Restaurar botón
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      
+      // Efecto visual adicional (opcional)
+      submitBtn.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        submitBtn.style.transform = 'scale(1)';
+      }, 300);
+      
+    }, 2000); // 2 segundos de "procesamiento"
+  });
+}
+
+  // Control de aparición del WhatsApp al hacer scroll
+  window.addEventListener("scroll", function () {
+    const whatsappBtn = document.getElementById("whatsappFloat");
+    const scrollPosition = window.scrollY;
+
+    // Aparece después de 300px de scroll (puedes ajustar este valor)
+    if (scrollPosition > 300) {
+      whatsappBtn.classList.add("active");
+    } else {
+      whatsappBtn.classList.remove("active");
+    }
   });
 });
