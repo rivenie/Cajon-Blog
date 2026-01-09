@@ -44,6 +44,10 @@ a:hover {
   padding: 0 15px;
 }
 
+.container.header-content img{
+  width: 200px;
+}
+
 /* Header mejorado */
 header {
   background-image: linear-gradient(to right, #fff 80%, #f8f9fa 20%);
@@ -904,7 +908,7 @@ footer {
   transform: translateX(5px);
 }
 
-.footer-contact p {
+.footer-contact a {
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -973,7 +977,7 @@ footer {
   nav ul {
     margin-top: 15px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   nav ul li {
