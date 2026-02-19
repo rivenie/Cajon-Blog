@@ -44,7 +44,7 @@ a:hover {
   padding: 0 15px;
 }
 
-.container.header-content img{
+.container.header-content img {
   width: 200px;
 }
 
@@ -64,36 +64,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.logo {
-  font-size: 32px;
-  font-weight: 700;
-  display: flex;
-}
-
-.logo-j {
-  color: #4685f4;
-}
-
-.logo-a {
-  color: #000;
-}
-
-.logo-m {
-  color: #000;
-}
-
-.logo-b {
-  color: #4685f4;
-}
-
-.logo-e {
-  color: #000;
-}
-
-.logo-r {
-  color: #000;
 }
 
 nav ul {
@@ -133,7 +103,6 @@ nav ul li a:hover {
   color: #4685f4;
 }
 
-/* Hero Section */
 /* Hero Section */
 .hero {
   color: white;
@@ -258,9 +227,6 @@ nav ul li a:hover {
 }
 
 /* Services Section */
-
-
-
 .services-section {
   padding: 90px 0;
   position: relative;
@@ -373,7 +339,6 @@ nav ul li a:hover {
 }
 
 /* Sección de dashboards más potentes */
-
 .features-section,
 .features-section * {
   font-family: 'Sans_Pro_Light', sans-serif !important;
@@ -419,7 +384,6 @@ nav ul li a:hover {
 
 .features-intro {
   margin-bottom: 40px;
-  /* Espacio entre el texto introductorio y los elementos con íconos */
   font-size: 1.1rem;
   color: #727272;
   line-height: 1.6;
@@ -518,7 +482,6 @@ nav ul li a:hover {
   transition: all 0.3s ease;
   border: 1px solid #f0f0f0;
   flex: 0 0 calc(33.333% - 30px);
-  /* 3 tarjetas por vista - 30px de gap */
   margin: 0 15px;
   min-width: 300px;
   box-sizing: border-box;
@@ -654,6 +617,8 @@ nav ul li a:hover {
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
+  max-width: 90%;
+  max-height: 90%;
 }
 
 .modal-content {
@@ -761,86 +726,118 @@ textarea.form-control {
 /* Estilos del WhatsApp flotante */
 .whatsapp-float {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 60px;
-  height: 60px;
+  bottom: 30px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #25d366, #128C7E);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px);
+  transform: scale(0.8) translateY(20px);
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  animation: none;
 }
 
 .whatsapp-float.active {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: scale(1) translateY(0);
 }
 
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
-}
-
-.whatsapp-icon {
-  width: 70px;
-  /* Tamaño del ícono */
-  height: 70px;
-  object-fit: contain;
-  /* Mantiene la proporción */
-}
-
-/* Mantén tu CSS existente del formulario */
-.contact-section {
-  padding: 90px 0;
-}
-
-.contact-form {
-  background: white;
-  padding: 45px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 850px;
-  margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 24px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 500;
-  color: #000;
-  font-size: 1.05rem;
-}
-
-.form-control {
-  width: 100%;
-  padding: 15px 18px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
+.whatsapp-float i {
+  color: white;
+  font-size: 38px;
   transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
 }
 
-.form-control:focus {
-  border-color: #4685f4;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(70, 133, 244, 0.2);
+/* Efecto pulse mejorado */
+.whatsapp-float::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #25d366;
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s ease-out infinite;
 }
 
-textarea.form-control {
-  min-height: 140px;
-  resize: vertical;
+/* Segundo anillo de pulse (opcional para más efecto) */
+.whatsapp-float::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(37, 211, 102, 0.4);
+  border-radius: 50%;
+  z-index: -2;
+  animation: pulse2 2s ease-out infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse2 {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Efecto hover */
+.whatsapp-float:hover {
+  transform: scale(1.15) translateY(-5px);
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float:hover i {
+  transform: rotate(5deg);
+}
+
+/* Versión para móviles */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .whatsapp-float i {
+    font-size: 32px;
+  }
 }
 
 /* Footer */
@@ -941,13 +938,16 @@ footer {
 }
 
 @media (max-width: 992px) {
+  .footer-contact a {
+    justify-content: center;
+  }
+
   .hero h1 {
     font-size: 2.7rem;
   }
 
   .hero p {
     font-size: 1.1rem;
-    /* Reducido para tablet */
   }
 
   nav ul li {
@@ -956,7 +956,6 @@ footer {
 
   .post-card {
     flex: 0 0 calc(50% - 20px);
-    /* 2 tarjetas en tablet */
   }
 }
 
@@ -992,7 +991,6 @@ footer {
 
   .hero-image {
     display: none;
-    /* Oculta la imagen en móvil */
   }
 
   .hero-text {
@@ -1002,14 +1000,12 @@ footer {
 
   .hero h1 {
     font-size: 2.2rem;
-    /* Mucho más pequeño para móvil */
     margin-bottom: 15px;
     line-height: 1.3;
   }
 
   .hero p {
     font-size: 1rem;
-    /* Más pequeño para móvil */
     margin-bottom: 25px;
     line-height: 1.5;
   }
@@ -1022,15 +1018,12 @@ footer {
 
   .btn {
     padding: 12px 28px;
-    /* Botones más compactos */
     font-size: 0.9rem;
   }
 
-  /* Ajusta la altura del hero para móvil */
   .hero,
   .hero .color-overlay {
     min-height: 80vh;
-    /* Reduce la altura en móvil */
     height: auto;
   }
 
@@ -1084,19 +1077,15 @@ footer {
 
   .post-card {
     flex: 0 0 calc(100% - 20px);
-    /* 1 tarjeta en móvil */
     min-width: 250px;
-    /* Más pequeño en móvil */
   }
 
   .post-image {
     height: 160px;
-    /* Más pequeño en móvil */
   }
 
   .blog-section {
     padding: 50px 0;
-    /* Menos padding en móvil */
   }
 
   .contact-form {
@@ -1121,5 +1110,9 @@ footer {
     top: 15px;
     right: 20px;
     font-size: 35px;
+  }
+
+  .footer-contact a {
+    justify-content: center;
   }
 }

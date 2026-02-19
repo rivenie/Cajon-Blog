@@ -1,65 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Sitio de Jamber cargado correctamente");
+  console.log("Sitio de Cajon cargado correctamente");
 
   // Efecto de cambio de header al hacer scroll
   window.addEventListener("scroll", function () {
     const header = document.querySelector("header");
     if (window.scrollY > 100) {
-      header.style.background = "rgba(255, 255, 255, 0.80)";
-      header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.05)";
+      header.style.background = "rgba(255, 255, 255, 0.95)";
+      header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
     } else {
-      header.style.background =
-        "linear-gradient(to right, #fff 80%, #f8f9fa 20%)";
+      header.style.background = "linear-gradient(to right, #fff 80%, #f8f9fa 20%)";
       header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.08)";
     }
   });
 
-  // Manejo del formulario de contacto
-  const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert("¡Gracias por contactarnos! Te responderemos pronto.");
-      contactForm.reset();
-    });
-  }
-
-  // Smooth scrolling para enlaces de navegación
-  document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
+  // Smooth scrolling para todos los enlaces internos
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-
-      const targetElement = document.querySelector(targetId);
+      const href = this.getAttribute("href");
+      if (href === "#") return;
+      
+      const targetElement = document.querySelector(href);
       if (targetElement) {
-        // Calcular posición considerando el header fijo
+        e.preventDefault();
         const headerOffset = 80;
         const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
-    });
-  });
-
-  // Smooth scrolling para enlaces del footer
-  document.querySelectorAll('footer a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
@@ -74,24 +39,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalImg = document.getElementById("modalImage");
   const modalCaption = document.getElementById("modalCaption");
   const closeBtn = document.querySelector(".close");
-  const modalContainer = document.querySelector(".modal-container");
 
   // Función para extraer la URL de la imagen del background
   function extractBackgroundUrl(backgroundStyle) {
-    // Manejar diferentes formatos de background-image
     const match = backgroundStyle.match(/url\(["']?(.*?)["']?\)/);
     return match ? match[1] : "";
   }
 
   // Función para abrir el modal
   function openModal(imageUrl, captionText) {
+    if (!imageUrl) return;
+    
     modal.style.display = "flex";
     setTimeout(() => {
       modal.classList.add("show");
     }, 10);
     document.body.style.overflow = "hidden";
     modalImg.src = imageUrl;
-    modalCaption.textContent = captionText;
+    modalCaption.textContent = captionText || "Dashboard Cajon";
   }
 
   // Función para cerrar el modal
@@ -107,58 +72,47 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".post-image").forEach((item) => {
     item.addEventListener("click", function (e) {
       e.preventDefault();
+      e.stopPropagation();
 
-      // Obtener la URL de la imagen
       let imageUrl = this.getAttribute("data-image");
-
-      // Si no hay data-image, intentar extraerla del background
       if (!imageUrl) {
         imageUrl = extractBackgroundUrl(this.style.backgroundImage);
       }
 
-      const captionText =
-        this.closest(".post-card").querySelector(".post-title").textContent;
-
-      if (imageUrl) {
-        openModal(imageUrl, captionText);
-      } else {
-        console.error("No se pudo encontrar la URL de la imagen");
-      }
+      const card = this.closest(".post-card");
+      const title = card?.querySelector(".post-title")?.textContent || "Dashboard Cajon";
+      
+      openModal(imageUrl, title);
     });
   });
 
-  // Agregar evento a todos los botones "Ver más"
+  // Agregar evento a todos los botones "Ver imagen"
   document.querySelectorAll(".view-image").forEach((item) => {
     item.addEventListener("click", function (e) {
       e.preventDefault();
+      e.stopPropagation();
+
       const card = this.closest(".post-card");
       const imageElement = card.querySelector(".post-image");
 
-      // Obtener la URL de la imagen
       let imageUrl = imageElement.getAttribute("data-image");
-
-      // Si no hay data-image, intentar extraerla del background
       if (!imageUrl) {
         imageUrl = extractBackgroundUrl(imageElement.style.backgroundImage);
       }
 
-      const captionText = card.querySelector(".post-title").textContent;
-
-      if (imageUrl) {
-        openModal(imageUrl, captionText);
-      } else {
-        console.error("No se pudo encontrar la URL de la imagen");
-      }
+      const title = card.querySelector(".post-title").textContent;
+      openModal(imageUrl, title);
     });
   });
 
   // Cerrar modal
-  closeBtn.addEventListener("click", closeModal);
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeModal);
+  }
 
   // Cerrar modal al hacer clic fuera de la imagen
   modal.addEventListener("click", function (e) {
-    // Verificar si el clic fue en el fondo del modal (no en el contenido)
-    if (e.target === modal || !modalContainer.contains(e.target)) {
+    if (e.target === modal || e.target.classList.contains('modal-container')) {
       closeModal();
     }
   });
@@ -170,15 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  modal.addEventListener("click", function (e) {
-    console.log("Clic en modal:", e.target);
-    console.log("¿Es igual al modal?", e.target === modal);
-    if (e.target === modal) {
-      console.log("Cerrando modal...");
-      closeModal();
-    }
-  });
-
   // ===== FUNCIONALIDAD DEL CARRUSEL =====
   const carousel = document.querySelector(".carousel");
   const cards = document.querySelectorAll(".post-card");
@@ -186,131 +131,123 @@ document.addEventListener("DOMContentLoaded", function () {
   const nextBtn = document.querySelector(".carousel-control.next");
   const dotsContainer = document.querySelector(".carousel-dots");
 
-  let currentIndex = 0;
+  if (carousel && cards.length > 0 && prevBtn && nextBtn) {
+    let currentIndex = 0;
 
-  // Determinar cuántas tarjetas mostrar según el ancho de la pantalla
-  const cardsPerView = () => {
-    if (window.innerWidth >= 992) return 3;
-    if (window.innerWidth >= 768) return 2;
-    return 1;
-  };
+    // Determinar cuántas tarjetas mostrar según el ancho de la pantalla
+    const cardsPerView = () => {
+      if (window.innerWidth >= 992) return 3;
+      if (window.innerWidth >= 768) return 2;
+      return 1;
+    };
 
-  // Calcular el ancho total de cada tarjeta incluyendo márgenes
-  const getCardWidth = () => {
-    if (cards.length === 0) return 0;
-    const cardStyle = window.getComputedStyle(cards[0]);
-    const width = cards[0].offsetWidth;
-    const marginLeft = parseFloat(cardStyle.marginLeft) || 0;
-    const marginRight = parseFloat(cardStyle.marginRight) || 0;
-    return width + marginLeft + marginRight;
-  };
+    // Calcular el ancho de cada tarjeta
+    const getCardWidth = () => {
+      const firstCard = cards[0];
+      const cardStyle = window.getComputedStyle(firstCard);
+      const marginLeft = parseFloat(cardStyle.marginLeft) || 0;
+      const marginRight = parseFloat(cardStyle.marginRight) || 0;
+      return firstCard.offsetWidth + marginLeft + marginRight;
+    };
 
-  // Crear dots para el carrusel
-  function createDots() {
-    dotsContainer.innerHTML = "";
-    const totalSlides = Math.ceil(cards.length / cardsPerView());
+    // Crear dots para el carrusel
+    function createDots() {
+      if (!dotsContainer) return;
+      
+      dotsContainer.innerHTML = "";
+      const totalSlides = Math.ceil(cards.length / cardsPerView());
 
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement("div");
-      dot.classList.add("dot");
-      if (i === currentIndex) dot.classList.add("active");
-      dot.addEventListener("click", () => {
-        goToSlide(i);
-      });
-      dotsContainer.appendChild(dot);
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        if (i === currentIndex) dot.classList.add("active");
+        dot.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
     }
-  }
 
-  // Función para mover el carrusel
-  function goToSlide(index) {
-    const totalSlides = Math.ceil(cards.length / cardsPerView());
-    if (index < 0) index = totalSlides - 1;
-    if (index >= totalSlides) index = 0;
+    // Función para mover el carrusel
+    function goToSlide(index) {
+      const totalSlides = Math.ceil(cards.length / cardsPerView());
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
 
-    currentIndex = index;
-    const cardWidth = getCardWidth();
-    const cardsToShow = cardsPerView();
-    const translateX = -currentIndex * (cardWidth * cardsToShow);
+      currentIndex = index;
+      const cardWidth = getCardWidth();
+      const cardsToShow = cardsPerView();
+      const translateX = -currentIndex * (cardWidth * cardsToShow);
 
-    carousel.style.transform = `translateX(${translateX}px)`;
+      carousel.style.transform = `translateX(${translateX}px)`;
 
-    // Actualizar dots activos
-    document.querySelectorAll(".dot").forEach((dot, i) => {
-      dot.classList.toggle("active", i === currentIndex);
+      // Actualizar dots activos
+      document.querySelectorAll(".dot").forEach((dot, i) => {
+        dot.classList.toggle("active", i === currentIndex);
+      });
+    }
+
+    // Event listeners para los controles
+    prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+
+    // Inicializar carrusel
+    createDots();
+    goToSlide(0);
+
+    // Ajustar carrusel en redimensionamiento
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        createDots();
+        goToSlide(currentIndex);
+      }, 250);
     });
   }
 
-  // Event listeners para los controles
-  prevBtn.addEventListener("click", () => {
-    goToSlide(currentIndex - 1);
-  });
-
-  nextBtn.addEventListener("click", () => {
-    goToSlide(currentIndex + 1);
-  });
-
-  // Inicializar carrusel
-  createDots();
-  goToSlide(0);
-
-  // Ajustar carrusel en redimensionamiento
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      createDots();
-      goToSlide(currentIndex);
-    }, 250);
-  });
-
-  // Formulario con pura finta
-const contactFormu = document.getElementById("contactForm");
-
-if (contactFormu) {
-  contactFormu.addEventListener("submit", function (e) {
-    e.preventDefault();
-    
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    
-    // Efecto de "enviando" más realista
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.7';
-    
-    // Simular tiempo de envío (2 segundos)
-    setTimeout(() => {
-      // Mensaje de éxito
-      alert("✅ ¡Mensaje enviado con éxito!\n\nTe contactaremos dentro de las próximas 24 horas.");
+  // ===== FORMULARIO DE CONTACTO =====
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
       
-      // Resetear formulario
-      contactFormu.reset();
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
       
-      // Restaurar botón
-      submitBtn.textContent = originalText;
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '1';
+      // Efecto de "enviando"
+      submitBtn.textContent = 'Enviando...';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
       
-      // Efecto visual adicional (opcional)
-      submitBtn.style.transform = 'scale(1.05)';
+      // Simular tiempo de envío
       setTimeout(() => {
-        submitBtn.style.transform = 'scale(1)';
-      }, 300);
-      
-    }, 2000); // 2 segundos de "procesamiento"
-  });
-}
+        alert("✅ ¡Mensaje enviado con éxito!\n\nTe contactaremos dentro de las próximas 24 horas.");
+        
+        contactForm.reset();
+        
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        
+        // Efecto visual
+        submitBtn.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          submitBtn.style.transform = 'scale(1)';
+        }, 300);
+        
+      }, 2000);
+    });
+  }
 
   // Control de aparición del WhatsApp al hacer scroll
-  window.addEventListener("scroll", function () {
-    const whatsappBtn = document.getElementById("whatsappFloat");
-    const scrollPosition = window.scrollY;
-
-    // Aparece después de 300px de scroll (puedes ajustar este valor)
-    if (scrollPosition > 300) {
-      whatsappBtn.classList.add("active");
-    } else {
-      whatsappBtn.classList.remove("active");
-    }
-  });
+  const whatsappBtn = document.getElementById("whatsappFloat");
+  if (whatsappBtn) {
+    window.addEventListener("scroll", function () {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 300) {
+        whatsappBtn.classList.add("active");
+      } else {
+        whatsappBtn.classList.remove("active");
+      }
+    });
+  }
 });
