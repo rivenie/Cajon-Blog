@@ -445,51 +445,87 @@
       </div>
     </div>
 
-    <!-- Contact Form Section -->
-    <section class="contact-section" id="contacto">
+    <!-- Video Gallery Section -->
+    <section class="video-gallery-section" id="videos">
       <div class="container">
-        <h2 class="section-title">Contáctanos</h2>
-        <div class="contact-form">
-          <form id="contactForm">
-            <div class="form-group">
-              <label for="name">Razón Social / Nombres y Apellidos *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="form-control"
-                required
-              />
-            </div>
+        <h2 class="section-title">Nuestros Videos</h2>
 
-            <div class="form-group">
-              <label for="email">Correo Electrónico *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="form-control"
-                required
-              />
+        <div class="video-grid">
+          <!-- Video 1 -->
+          <div class="video-card">
+            <div class="video-wrapper" data-video="video1">
+              <video
+                class="video-player"
+                poster="img/video1-poster.jpg"
+                preload="metadata"
+              >
+                <source src="video/VideoCajon.mp4" type="video/mp4" />
+                Tu navegador no soporta el elemento de video.
+              </video>
+              <div class="video-overlay">
+                <button class="video-play-btn" aria-label="Reproducir video">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
             </div>
-
-            <div class="form-group">
-              <label for="phone">Celular</label>
-              <input type="tel" id="phone" name="phone" class="form-control" />
+            <div class="video-info">
+              <h3 class="video-title">Dashboard en acción</h3>
+              <p class="video-description">
+                Descubre cómo nuestros dashboards transforman tus datos en
+                decisiones.
+              </p>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label for="message">Cuéntanos sobre tu proyecto *</label>
-              <textarea
-                id="message"
-                name="message"
-                class="form-control"
-                required
-              ></textarea>
+          <!-- Video 2 -->
+          <div class="video-card">
+            <div class="video-wrapper" data-video="video2">
+              <video
+                class="video-player"
+                poster="img/video2-poster.jpg"
+                preload="metadata"
+              >
+                <source src="video/VideoCajon2.mp4" type="video/mp4" />
+                Tu navegador no soporta el elemento de video.
+              </video>
+              <div class="video-overlay">
+                <button class="video-play-btn" aria-label="Reproducir video">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
             </div>
+            <div class="video-info">
+              <h3 class="video-title">Análisis en tiempo real</h3>
+              <p class="video-description">
+                Visualiza métricas clave al instante con nuestra tecnología.
+              </p>
+            </div>
+          </div>
 
-            <button type="submit" class="btn">Enviar mensaje</button>
-          </form>
+          <!-- Video 3 -->
+          <div class="video-card">
+            <div class="video-wrapper" data-video="video3">
+              <video
+                class="video-player"
+                poster="img/video3-poster.jpg"
+                preload="metadata"
+              >
+                <source src="video/VideoCajon3.mp4" type="video/mp4" />
+                Tu navegador no soporta el elemento de video.
+              </video>
+              <div class="video-overlay">
+                <button class="video-play-btn" aria-label="Reproducir video">
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3 class="video-title">Reportes inteligentes</h3>
+              <p class="video-description">
+                Automatiza tus reportes y ahorra horas de trabajo.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

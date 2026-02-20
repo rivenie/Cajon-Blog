@@ -106,30 +106,21 @@ nav ul li a:hover {
 /* Hero Section */
 .hero {
   color: white;
-  min-height: 100vh;
+  min-height: 100vh;  
   display: flex;
   align-items: center;
   width: 100%;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
+  overflow: hidden;  
+  background-size: cover;
+  background-position: center;
 }
 
 .hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("../img/headerimg.jpg");
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
+display: none;
 }
 
-.hero .color-overlay {
-  background: rgba(0, 0, 0, 0.5) !important;
+.hero .color-overlay {  
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -676,51 +667,330 @@ nav ul li a:hover {
   transform: scale(1.03);
 }
 
-/* Contact Form */
-.contact-section {
+/* Video Gallery Section */
+.video-gallery-section {
   padding: 90px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.contact-form {
+.video-gallery-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #0061a1, transparent);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.video-card {
   background: white;
-  padding: 45px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 850px;
-  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(0, 97, 161, 0.1);
 }
 
-.form-group {
-  margin-bottom: 24px;
+.video-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 25px 40px rgba(0, 97, 161, 0.2);
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 500;
-  color: #000;
-  font-size: 1.05rem;
-}
-
-.form-control {
+.video-wrapper {
+  position: relative;
   width: 100%;
-  padding: 15px 18px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding-top: 177.77%;
+  /* Proporción 9:16 para videos verticales */
+  background: #000;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  /* Ocultar cualquier control nativo que pueda aparecer */
+  pointer-events: none;
+  /* Esto hace que el video no reciba eventos de clic */
+}
+
+/* Importante: Permitir que el wrapper reciba los eventos */
+.video-wrapper {
+  pointer-events: auto;
+}
+
+.video-card:hover .video-player {
+  transform: scale(1.05);
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
   transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
+  pointer-events: none;
+  /* El overlay no bloquea los clics */
 }
 
-.form-control:focus {
-  border-color: #4685f4;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(70, 133, 244, 0.2);
+.video-play-btn {
+  width: 70px;
+  height: 70px;
+  background: #0061a1;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 5px 15px rgba(0, 97, 161, 0.5);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  pointer-events: auto;
+  /* El botón sí recibe clics */
+  position: relative;
+  z-index: 15;
 }
 
-textarea.form-control {
-  min-height: 140px;
-  resize: vertical;
+.video-play-btn i {
+  margin-left: 5px;
+}
+
+.video-play-btn:hover {
+  transform: scale(1.2);
+  background: #0186ca;
+  box-shadow: 0 10px 25px rgba(1, 134, 202, 0.6);
+}
+
+.video-card.playing .video-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.video-info {
+  padding: 25px 20px;
+  text-align: center;
+}
+
+.video-title {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #0061a1;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.video-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: #0061a1;
+  border-radius: 2px;
+}
+
+.video-description {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-top: 15px;
+}
+
+/* Modal para video expandido */
+.video-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+}
+
+.video-modal.show {
+  display: flex;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  background: transparent;
+}
+
+.video-modal-content video {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.close-video-modal {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  z-index: 10000;
+}
+
+.close-video-modal:hover {
+  color: #0061a1;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Botón de pantalla completa */
+.view-fullscreen-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 20;
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: auto;
+}
+
+.video-card:hover .view-fullscreen-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.view-fullscreen-btn:hover {
+  background: #0061a1;
+  border-color: white;
+  transform: scale(1.1);
+}
+
+/* Cuando el video está reproduciendo */
+.video-card.playing .view-fullscreen-btn {
+  opacity: 0.8;
+  background: rgba(0, 97, 161, 0.9);
+  pointer-events: auto;
+}
+
+.video-card.playing .view-fullscreen-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Eliminar cualquier estilo de controles nativos */
+video::-webkit-media-controls {
+  display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+
+video::-webkit-media-controls-timeline {
+  display: none !important;
+}
+
+video::-webkit-media-controls-current-time-display {
+  display: none !important;
+}
+
+video::-webkit-media-controls-time-remaining-display {
+  display: none !important;
+}
+
+video::-webkit-media-controls-mute-button {
+  display: none !important;
+}
+
+video::-webkit-media-controls-volume-slider {
+  display: none !important;
+}
+
+video::-webkit-media-controls-fullscreen-button {
+  display: none !important;
+}
+
+/* Para Firefox */
+video::-moz-range-track {
+  display: none;
+}
+
+video::-moz-range-thumb {
+  display: none;
+}
+
+/* Para IE/Edge */
+video::-ms-track {
+  display: none;
+}
+
+video::-ms-fill-lower {
+  display: none;
+}
+
+video::-ms-fill-upper {
+  display: none;
+}
+
+video::-ms-tooltip {
+  display: none;
 }
 
 /* Estilos del WhatsApp flotante */
@@ -833,6 +1103,27 @@ textarea.form-control {
     height: 60px;
     bottom: 20px;
     right: 20px;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .video-gallery-section {
+    padding: 60px 0;
+  }
+
+  .video-play-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+
+  .video-title {
+    font-size: 1.2rem;
   }
 
   .whatsapp-float i {
@@ -956,6 +1247,10 @@ footer {
 
   .post-card {
     flex: 0 0 calc(50% - 20px);
+  }
+
+  .video-grid {
+    gap: 20px;
   }
 }
 
@@ -1114,5 +1409,11 @@ footer {
 
   .footer-contact a {
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-modal-content {
+    width: 95%;
   }
 }
