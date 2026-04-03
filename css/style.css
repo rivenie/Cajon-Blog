@@ -34,7 +34,7 @@ a {
 }
 
 a:hover {
-  color: #000;
+  color: #fff;
 }
 
 .container {
@@ -162,82 +162,140 @@ nav ul li a:hover {
   z-index: 3;
 }
 
-.hero-image {
+.hero-images {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.hero-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.hero-text {
-  flex: 1;
-  text-align: left;
-}
-
-.hero h1 {
-  font-size: 2.113rem;
-  margin-bottom: 20px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 2.75rem;
-  font-weight: 500;
-}
-
-.hero p {
-  font-size: 18px;
-  line-height: 28px;
-  margin-bottom: 30px;
-  font-weight: 300;
-  max-width: 100%;
-}
-
-.hero p strong {
-  font-weight: bold;
-}
-
-.btn-container {
+.hero-images-stack {
+  flex: 1.2;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 40px;
+  /* Más separación entre imágenes */
+}
+
+.hero-image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image-large {
+  width: 100%;
+  max-width: 480px;
+  /* Más grande que antes */
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-image-large:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 97, 161, 0.2);
+}
+
+/* Texto alineado a la izquierda */
+.hero-text-aligned {
+  flex: 0.9;
+  text-align: right;
+}
+
+/* Título más grande con inclinación hacia la derecha */
+.hero-title-directional {
+  font-size: 3.2rem;
+  /* Más grande */
+  line-height: 1.2;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #fff;
+  transform: skewX(-5deg);
+  /* Inclinación sutil hacia la derecha */
+  letter-spacing: -0.02em;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de "dirección" adicional - línea decorativa diagonal */
+.hero-title-directional::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #4685f4, transparent);
+  margin-top: 15px;
+  transform: skewX(-5deg);
+}
+
+/* Párrafo más grande y alineado a la izquierda */
+.hero-description-directional {
+  font-size: 1.3rem;
+  /* Más grande */
+  line-height: 1.6;
+  margin-bottom: 35px;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: right;
 }
 
 .btn {
   display: inline-block;
-  background-color: #0061a1;
-  color: white;
   padding: 14px 32px;
   font-weight: 600;
   text-transform: uppercase;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
+  font-size: 0.9rem;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(70, 133, 244, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
   text-decoration: none;
-  border-radius: 3px;
+  text-align: center;
+  /* Elige una de estas tres opciones: */
+  border-radius: 0px;
+  /* Opción A: completamente cuadrado */
+  /* border-radius: 4px; */
+  /* Opción B: ligeramente redondeado (recomendado) */
+  /* border-radius: 3px; */
+  /* Opción C: como tenías originalmente */
 }
 
-.btn:hover {
-  background-color: #0186ca;
+/* Botón primario - Contáctanos */
+.btn-primary {
+  background-color: #4685f4;
   color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  border: 2px solid #0061a1;
+  box-shadow: 0 0 12px rgba(70, 133, 244, 0.5);
+  /* Glow azul */
 }
 
+.btn-primary:hover {
+  background-color: #0061a1;
+  border-color: #0186ca;
+  transform: translateY(-3px);
+  box-shadow: 0 0 18px rgba(70, 133, 244, 0.7);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Botón secundario - Conoce más (outline) */
 .btn-secondary {
   background-color: transparent;
+  color: white;
   border: 2px solid white;
   box-shadow: none;
 }
 
 .btn-secondary:hover {
-  background-color: white;
-  color: #333;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateY(-3px);
+  border-color: white;
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
 }
 
 /* Services Section */
@@ -1264,6 +1322,44 @@ footer {
     font-size: 1.1rem;
   }
 
+  .hero-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hero-images-stack {
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-image-large {
+    max-width: 280px;
+  }
+
+  .hero-title-directional {
+    font-size: 2.5rem;
+    transform: skewX(-3deg);
+    text-align: center;
+  }
+
+  .hero-title-directional::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-description-directional {
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .btn-container-left {
+    justify-content: center;
+    display: flex;
+  }
+
   nav ul li {
     margin-left: 20px;
   }
@@ -1307,42 +1403,35 @@ footer {
     gap: 30px;
   }
 
-  .hero-image {
-    display: none;
-  }
-
-  .hero-text {
-    text-align: center;
-    padding: 0 20px;
-  }
-
-  .hero h1 {
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-    line-height: 1.3;
-  }
-
-  .hero p {
-    font-size: 1rem;
-    margin-bottom: 25px;
-    line-height: 1.5;
-  }
-
-  .btn-container {
+  .hero-images {
+    display: flex;
     justify-content: center;
+  }
+
+  .hero-image-stack {
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 15px;
   }
 
-  .btn {
-    padding: 12px 28px;
-    font-size: 0.9rem;
+  .hero-img-top,
+  .hero-img-bottom {
+    max-width: 45%;
   }
 
-  .hero,
-  .hero .color-overlay {
-    min-height: 80vh;
-    height: auto;
+  .hero-image-large {
+    max-width: 220px;
+  }
+
+  .hero-title-directional {
+    font-size: 2rem;
+    transform: none;
+    /* Quitar inclinación en móvil para legibilidad */
+  }
+
+  .hero-description-directional {
+    font-size: 1rem;
   }
 
   .services-grid {

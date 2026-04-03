@@ -492,11 +492,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Insertar el contenedor al inicio del hero
     hero.appendChild(slideshowContainer);
 
-    const images = [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80",
-      "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2076&q=80",
-    ];
+    const images = ["img/opcion_a.png", "img/opcion_b.png"];
 
     // Crear capas para cada imagen - SIN Z-INDEX
     const layers = images.map((src, index) => {
@@ -527,7 +523,7 @@ document.addEventListener("DOMContentLoaded", function () {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%);
   /* Z-INDEX ELIMINADO */
   pointer-events: none;
 `;
