@@ -3,38 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cajon - Soluciones Digitales</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    <meta
+      name="description"
+      content="DataVista: dashboards y business intelligence para convertir tus datos en decisiones rápidas y seguras."
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>DataVista | Dashboards y Business Intelligence</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <!-- Header -->
-    <header>
+    <header id="header">
       <div class="container header-content">
-        <img src="img/CajonLogo02.png" alt="logo" />
-        <nav>
+        <a href="#inicio" class="logo-link" aria-label="Ir al inicio">
+          <img
+            src="img/datavista-logo.png"
+            alt="DataVista"
+            width="160"
+            height="48"
+            decoding="async"
+          />
+        </a>
+        <nav aria-label="Navegación principal">
           <ul>
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#servicios">Servicios</a></li>
             <li><a href="#dashboards">Dashboards</a></li>
+            <li><a href="#videos">Videos</a></li>
             <li>
               <a
-                href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Cajon"
+                href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20DataVista"
                 target="_blank"
                 rel="noopener noreferrer"
+                class="nav-cta"
                 >Contacto</a
               >
             </li>
@@ -43,581 +51,482 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero" id="inicio">
-      <div class="color-overlay">
-        <div class="container hero-content">
-          <div class="hero-images-stack">
-            <div class="hero-image-wrapper">
-              <img
-                src="img/pantalla-inicial.png"
-                alt="Dashboard vista general"
-                class="hero-image-large"
-              />
-            </div>
-            <div class="hero-image-wrapper">
-              <img
-                src="img/pantalla-inicial02.png"
-                alt="Dashboard análisis detallado"
-                class="hero-image-large"
-              />
-            </div>
+      <div class="hero-slideshow" aria-hidden="true">
+        <div
+          class="hero-layer active"
+          style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1920&q=80')"
+        ></div>
+        <div
+          class="hero-layer"
+          style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80')"
+        ></div>
+      </div>
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <div class="hero-text">
+          <span class="hero-eyebrow">
+            <i class="fa-solid fa-bolt"></i> Business Intelligence
+          </span>
+          <h1 class="hero-title">
+            Convierte tus datos en
+            <span class="gradient-text">ventaja competitiva</span>
+          </h1>
+          <p class="hero-description">
+            Transformamos tus datos en dashboards claros, vivos y fáciles de
+            usar para que tomes decisiones rápidas y seguras.
+          </p>
+          <div class="hero-buttons">
+            <a
+              href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20DataVista"
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-brands fa-whatsapp"></i> Contáctanos
+            </a>
+            <a href="#dashboards" class="btn btn-ghost">
+              Conoce más <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
-          <div class="hero-text-aligned">
-            <h1 class="hero-title-directional">
-              <strong>Convierte</strong> tus datos en
-              <strong>ventaja</strong> competitiva
-            </h1>
-            <p class="hero-description-directional">
-              Transformamos tus datos en dashboard claros y fáciles de usar para
-              que tomes decisiones rápidas y seguras.
-            </p>
-            <div class="btn-container-left">
-              <a
-                href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Cajon"
-                class="btn"
-                target="_blank"
-                >Contáctanos</a
-              >
-              <a href="#dashboards" class="btn btn-secondary">Conoce más</a>
-            </div>
+          <ul class="hero-stats">
+            <li><strong>+50</strong><span>Dashboards</span></li>
+            <li><strong>+20</strong><span>Clientes</span></li>
+            <li><strong>24/7</strong><span>Disponible</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card hero-card-1">
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+              alt="Dashboard analítico"
+              loading="eager"
+            />
           </div>
+          <div class="hero-card hero-card-2">
+            <img
+              src="https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=900&q=80"
+              alt="Panel de métricas"
+              loading="lazy"
+            />
+          </div>
+          <div class="hero-glow"></div>
         </div>
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services-section parallax-bg" id="servicios">
+    <!-- Logos -->
+    <section class="logos-carousel-section" aria-label="Clientes">
       <div class="container">
-        <h2 class="section-title">El Dashboard perfecto para su empresa</h2>
+        <div class="logos-header">
+          <h2 class="logos-title">Empresas que confían en DataVista</h2>
+          <p class="logos-subtitle">
+            Ya están transformando sus datos con nosotros
+          </p>
+        </div>
+      </div>
+      <div class="logos-carousel-wrapper">
+        <div class="logos-track" id="logosTrack">
+          <div class="logo-item"><img src="logos/LOGO ANIN.webp" alt="Anin" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO SENATI.webp" alt="Senati" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO-ALFA-CO.webp" alt="Alfaco" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO-COSAPI.webp" alt="Cosapi" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO-GRUPO-EFE.webp" alt="Grupo-efe" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO-TAE.webp" alt="Tae" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO_ALICISAC.png" alt="Alicisac" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO_CONSECIÓN_VALLE.png" alt="Conseción del valle" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO_EL_TREBOL.png" alt="El trébol" loading="lazy" /></div>
+          <div class="logo-item"><img src="logos/LOGO_SEÑOR_DE_LOCUMBA.png" alt="Señor de locumba" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services-section" id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Servicios</span>
+          <h2 class="section-title">El dashboard perfecto para tu empresa</h2>
+          <p class="section-subtitle">
+            Todo lo que necesitas para analizar, entender y decidir.
+          </p>
+        </div>
 
         <div class="services-grid">
-          <!-- Servicio 1 -->
-          <div class="service-item">
-            <div class="service-icon">
-              <i class="fa-solid fa-cloud"></i>
-            </div>
-            <div class="service-content">
-              <h3>Desde cualquier lugar</h3>
-              <p>
-                Accede desde cualquier navegador a toda la información necesaria
-                para tomar decisiones, sin necesidad de instalar nada en el
-                cliente.
-              </p>
-            </div>
-          </div>
+          <article class="service-item">
+            <div class="service-icon"><i class="fa-solid fa-cloud"></i></div>
+            <h3>Desde cualquier lugar</h3>
+            <p>
+              Accede desde cualquier navegador a toda la información necesaria
+              para decidir, sin instalar nada.
+            </p>
+          </article>
 
-          <!-- Servicio 2 -->
-          <div class="service-item">
-            <div class="service-icon">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div class="service-content">
-              <h3>Ver el detalle</h3>
-              <p>
-                Permite profundizar en el análisis de los indicadores, motivos,
-                tendencias, distribución, ... abriendo cualquiera de los
-                Documentos Analíticos de Cajon.
-              </p>
-            </div>
-          </div>
+          <article class="service-item">
+            <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <h3>Ver el detalle</h3>
+            <p>
+              Profundiza en indicadores, motivos, tendencias y distribución
+              abriendo cualquier Documento Analítico.
+            </p>
+          </article>
 
-          <!-- Servicio 3 -->
-          <div class="service-item">
-            <div class="service-icon">
-              <i class="fa-solid fa-chart-pie"></i>
-            </div>
-            <div class="service-content">
-              <h3>No sólo gráficos</h3>
-              <p>
-                La flexibilidad de Cajon permite definir dashboards que incluyan
-                potentes elementos de análisis como tablas dinámicas o análisis
-                periódicos.
-              </p>
-            </div>
-          </div>
+          <article class="service-item">
+            <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            <h3>No solo gráficos</h3>
+            <p>
+              Define dashboards con tablas dinámicas y análisis periódicos para
+              ir más allá de lo visual.
+            </p>
+          </article>
 
-          <!-- Servicio 4 -->
-          <div class="service-item">
-            <div class="service-icon">
-              <i class="fa-solid fa-table"></i>
-            </div>
-            <div class="service-content">
-              <h3>Integración total</h3>
-              <p>
-                Además del Dashboard, integra todas las herramientas necesarias:
-                Reporting dinámico, Cuadros de mando, Tablas dinámicas, ...
-              </p>
-            </div>
-          </div>
+          <article class="service-item">
+            <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Integración total</h3>
+            <p>
+              Reporting dinámico, cuadros de mando, tablas dinámicas y más, en
+              un solo lugar.
+            </p>
+          </article>
 
-          <!-- Servicio 5 -->
-          <div class="service-item">
-            <div class="service-icon">
-              <i class="fa-solid fa-dollar-sign"></i>
-            </div>
-            <div class="service-content">
-              <h3>Rápida implantación</h3>
-              <p>
-                Elimina la complejidad intrínseca de los sistemas tradicionales
-                para ofrecer un sistema disponible en mucho menos tiempo que
-                cualquier otro BI.
-              </p>
-            </div>
-          </div>
+          <article class="service-item">
+            <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+            <h3>Rápida implantación</h3>
+            <p>
+              Sin la complejidad de los sistemas tradicionales, disponible en
+              mucho menos tiempo que cualquier otro BI.
+            </p>
+          </article>
 
-          <!-- Servicio 6 -->
-          <div class="service-item">
-            <div class="service-icon">
-              <i class="fa-solid fa-sliders"></i>
-            </div>
-            <div class="service-content">
-              <h3>Totalmente personalizable</h3>
-              <p>
-                Permite definir tus propias perspectivas, la forma de ver la
-                información, o determinar qué indicadores se cargan
-                automáticamente.
-              </p>
-            </div>
-          </div>
+          <article class="service-item">
+            <div class="service-icon"><i class="fa-solid fa-sliders"></i></div>
+            <h3>Totalmente personalizable</h3>
+            <p>
+              Define tus perspectivas, la forma de ver la información o qué
+              indicadores se cargan automáticamente.
+            </p>
+          </article>
         </div>
 
         <div class="services-cta">
-          <p class="cta-text">
+          <p>
             ¿Necesitas una solución personalizada?
             <a
-              href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Cajon"
+              href="https://wa.me/51904612934?text=Hola,%20quiero%20una%20solución%20personalizada%20de%20DataVista"
               target="_blank"
-              >Contáctanos</a
+              rel="noopener noreferrer"
+              >Hablemos</a
             >
-            para crear el dashboard perfecto para tu negocio
+            y creamos el dashboard perfecto.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Sección de dashboard potentes -->
+    <!-- Features -->
     <section class="features-section">
       <div class="container features-content">
-        <!-- Columna izquierda con texto e íconos -->
         <div class="features-text">
+          <span class="section-eyebrow">Potencia</span>
           <h2 class="features-title">Dashboards más potentes</h2>
           <div class="title-underline"></div>
-
-          <!-- Texto adicional debajo de la raya azul -->
           <p class="features-intro">
-            La combinación de los eleméntos típicos de Dashboards junto con
-            otros propios del reporting o del análisis OLAP permiten a Cajon la
-            creación de Dashboards mucho más potentes.
+            La combinación de elementos típicos de dashboards con reporting y
+            análisis OLAP permiten crear experiencias mucho más potentes.
           </p>
 
-          <!-- Primer elemento con ícono -->
           <div class="feature-item">
-            <div class="feature-icon">
-              <div class="service-icon">
-                <i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-            <div class="feature-content">
-              <h3 class="feature-subtitle">Todo tipo de elementos gráficos</h3>
-              <p class="feature-description">
-                Potentes gráficos, indicadores de tendencia, semáforos, gauges y
-                todos los elementos necesarios para un análisis rápido.
+            <div class="feature-icon"><i class="fa-solid fa-star"></i></div>
+            <div>
+              <h3>Todo tipo de elementos gráficos</h3>
+              <p>
+                Gráficos, indicadores de tendencia, semáforos, gauges y todo lo
+                necesario para un análisis rápido.
               </p>
             </div>
           </div>
 
-          <!-- Segundo elemento con ícono -->
           <div class="feature-item">
-            <div class="feature-icon">
-              <div class="service-icon">
-                <i class="fa-solid fa-pencil"></i>
-              </div>
-            </div>
-            <div class="feature-content">
-              <h3 class="feature-subtitle">
-                Integración de elementos de análisis
-              </h3>
-              <p class="feature-description">
-                Los dashboards de Cajon permiten incorporar elementos de
-                análisis como tablas dinámicas, comparativas periódicas, tablas
-                de datos para analizar la información en detalle de forma
-                flexible.
+            <div class="feature-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+            <div>
+              <h3>Integración de elementos de análisis</h3>
+              <p>
+                Tablas dinámicas, comparativas periódicas y tablas de datos
+                para analizar en detalle de forma flexible.
               </p>
             </div>
           </div>
         </div>
 
-        <!-- Columna derecha con imagen -->
         <div class="features-image">
-          <img src="img/pantalla-inicial02.png" alt="Dashboard Power BI" />
+          <img
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+            alt="Dashboard analítico de DataVista"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>
 
-    <!-- Blog Section con Carrusel -->
+    <!-- Dashboards -->
     <section class="blog-section" id="dashboards">
       <div class="container">
-        <h2 class="section-title">Nuestros Dashboards</h2>
+        <div class="section-head">
+          <span class="section-eyebrow">Galería</span>
+          <h2 class="section-title">Nuestros Dashboards</h2>
+          <p class="section-subtitle">
+            Plantillas listas para adaptar a tu negocio.
+          </p>
+        </div>
 
         <div class="carousel-container">
-          <div class="carousel">
-            <!-- Dashboard Estándar -->
+          <div class="carousel" id="dashboardsCarousel">
             <div class="post-card">
-              <div
-                class="post-image"
-                style="background-image: url(&quot;img/Estándar.png&quot;)"
-                data-image="img/Estándar.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Estándar</h3>
-                <p class="post-excerpt">
-                  Visualización completa de métricas principales para tu
-                  negocio.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Visualización completa de métricas principales.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard Avanzado -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="background-image: url(&quot;img/Avanzado.png&quot;)"
-                data-image="img/Avanzado.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Avanzado</h3>
-                <p class="post-excerpt">
-                  Análisis profundo con indicadores clave y tendencias.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Análisis profundo con indicadores clave.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard Ventas -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="
-                  background-image: url(&quot;img/ventasDashboard.png&quot;);
-                "
-                data-image="img/ventasDashboard.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Ventas</h3>
-                <p class="post-excerpt">
-                  Control total de tus ventas y rendimiento comercial.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Control total de tus ventas y rendimiento comercial.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard Financiero -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="
-                  background-image: url(&quot;img/financieroDashboard.png&quot;);
-                "
-                data-image="img/financieroDashboard.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Financiero</h3>
-                <p class="post-excerpt">
-                  Gestión financiera con indicadores en tiempo real.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Gestión financiera con indicadores en tiempo real.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard Marketing -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="
-                  background-image: url(&quot;img/marketingDashboard.png&quot;);
-                "
-                data-image="img/marketingDashboard.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Marketing</h3>
-                <p class="post-excerpt">
-                  Mide el ROI de tus campañas y estrategias digitales.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Mide el ROI de tus campañas digitales.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard Producción -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="
-                  background-image: url(&quot;img/produccionDashboard.png&quot;);
-                "
-                data-image="img/produccionDashboard.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Producción</h3>
-                <p class="post-excerpt">
-                  Optimiza tus procesos productivos y cadena de suministro.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Optimiza procesos productivos y cadena de suministro.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard RRHH -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="background-image: url(&quot;img/rrhhDashboard.jpg&quot;)"
-                data-image="img/rrhhDashboard.jpg"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard RRHH</h3>
-                <p class="post-excerpt">
-                  Gestión del talento y métricas de recursos humanos.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Gestión del talento y métricas de personas.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard Clientes -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="
-                  background-image: url(&quot;img/clientesDashboard.png&quot;);
-                "
-                data-image="img/clientesDashboard.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Clientes</h3>
-                <p class="post-excerpt">
-                  Analiza el comportamiento y satisfacción de tus clientes.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Comportamiento y satisfacción de tus clientes.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
 
-            <!-- Dashboard Ganancias -->
             <div class="post-card">
-              <div
-                class="post-image"
-                style="
-                  background-image: url(&quot;img/gananciasDashboard.png&quot;);
-                "
-                data-image="img/gananciasDashboard.png"
-              ></div>
+              <div class="post-image" style="background-image:url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=800&q=80')" data-image="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1600&q=80"></div>
               <div class="post-content">
                 <h3 class="post-title">Dashboard Ganancias</h3>
-                <p class="post-excerpt">
-                  Control de rentabilidad y márgenes de beneficio.
-                </p>
-                <span class="read-more view-image"
-                  >Ver imagen <i class="fas fa-eye"></i
-                ></span>
+                <p class="post-excerpt">Control de rentabilidad y márgenes de beneficio.</p>
+                <span class="read-more view-image" role="button" tabindex="0">Ver imagen <i class="fas fa-eye"></i></span>
               </div>
             </div>
           </div>
 
           <div class="carousel-controls">
-            <button class="carousel-control prev" aria-label="Anterior">
+            <button type="button" class="carousel-control prev" aria-label="Anterior">
               <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="carousel-control next" aria-label="Siguiente">
+            <button type="button" class="carousel-control next" aria-label="Siguiente">
               <i class="fas fa-chevron-right"></i>
             </button>
           </div>
 
-          <div class="carousel-dots"></div>
+          <div class="carousel-dots" aria-hidden="true"></div>
         </div>
       </div>
     </section>
 
-    <!-- Modal para imágenes -->
-    <div id="imageModal" class="modal">
-      <span class="close">&times;</span>
+    <!-- Modal -->
+    <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <span class="close" role="button" tabindex="0" aria-label="Cerrar">&times;</span>
       <div class="modal-container">
         <img class="modal-content" id="modalImage" alt="Dashboard ampliado" />
         <div class="modal-caption" id="modalCaption"></div>
       </div>
     </div>
 
-    <!-- Video Gallery Section -->
+    <!-- Videos -->
     <section class="video-gallery-section" id="videos">
       <div class="container">
-        <h2 class="section-title">Nuestros Videos</h2>
+        <div class="section-head">
+          <span class="section-eyebrow">Videos</span>
+          <h2 class="section-title">Nuestros Videos</h2>
+          <p class="section-subtitle">Mira DataVista en acción.</p>
+        </div>
 
         <div class="video-grid">
-          <!-- Video 1 -->
           <div class="video-card">
             <div class="video-wrapper" data-video="video1">
-              <video
-                class="video-player"
-                poster="img/video1-poster.jpg"
-                preload="metadata"
-              >
-                <source src="video/VideoCajon.mp4" type="video/mp4" />
-                Tu navegador no soporta el elemento de video.
+              <video class="video-player" poster="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" preload="metadata" playsinline muted loop>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
               </video>
               <div class="video-overlay">
-                <button class="video-play-btn" aria-label="Reproducir video">
+                <button type="button" class="video-play-btn" aria-label="Reproducir video">
                   <i class="fas fa-play"></i>
                 </button>
               </div>
             </div>
             <div class="video-info">
               <h3 class="video-title">Dashboard en acción</h3>
-              <p class="video-description">
-                Descubre cómo nuestros dashboards transforman tus datos en
-                decisiones.
-              </p>
+              <p class="video-description">Cómo nuestros dashboards transforman tus datos.</p>
             </div>
           </div>
 
-          <!-- Video 2 -->
           <div class="video-card">
             <div class="video-wrapper" data-video="video2">
-              <video
-                class="video-player"
-                poster="img/video2-poster.jpg"
-                preload="metadata"
-              >
-                <source src="video/VideoCajon2.mp4" type="video/mp4" />
-                Tu navegador no soporta el elemento de video.
+              <video class="video-player" poster="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" preload="metadata" playsinline muted loop>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4" />
               </video>
               <div class="video-overlay">
-                <button class="video-play-btn" aria-label="Reproducir video">
+                <button type="button" class="video-play-btn" aria-label="Reproducir video">
                   <i class="fas fa-play"></i>
                 </button>
               </div>
             </div>
             <div class="video-info">
               <h3 class="video-title">Análisis en tiempo real</h3>
-              <p class="video-description">
-                Visualiza métricas clave al instante con nuestra tecnología.
-              </p>
+              <p class="video-description">Métricas clave al instante con nuestra tecnología.</p>
             </div>
           </div>
 
-          <!-- Video 3 -->
           <div class="video-card">
             <div class="video-wrapper" data-video="video3">
-              <video
-                class="video-player"
-                poster="img/video3-poster.jpg"
-                preload="metadata"
-              >
-                <source src="video/VideoCajon3.mp4" type="video/mp4" />
-                Tu navegador no soporta el elemento de video.
+              <video class="video-player" poster="https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=600&q=80" preload="metadata" playsinline muted loop>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4" />
               </video>
               <div class="video-overlay">
-                <button class="video-play-btn" aria-label="Reproducir video">
+                <button type="button" class="video-play-btn" aria-label="Reproducir video">
                   <i class="fas fa-play"></i>
                 </button>
               </div>
             </div>
             <div class="video-info">
               <h3 class="video-title">Reportes inteligentes</h3>
-              <p class="video-description">
-                Automatiza tus reportes y ahorra horas de trabajo.
-              </p>
+              <p class="video-description">Automatiza reportes y ahorra horas de trabajo.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WhatsApp flotante -->
-
+    <!-- WhatsApp -->
     <a
-      href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Cajon"
+      href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20DataVista"
       class="whatsapp-float"
       id="whatsappFloat"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chatear por WhatsApp con Cajon"
+      aria-label="Chatear por WhatsApp"
     >
-      <i class="fab fa-whatsapp"></i>
+      <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 
     <!-- Footer -->
     <footer>
       <div class="container">
+        <div class="footer-logos">
+          <h3>Empresas que confían en nosotros</h3>
+          <div class="footer-logos-grid">
+            <div class="footer-logo-item"><img src="logos/LOGO ANIN.webp" alt="Anin" loading="lazy" /></div>
+            <div class="footer-logo-item"><img src="logos/LOGO SENATI.webp" alt="Senati" loading="lazy" /></div>
+            <div class="footer-logo-item"><img src="logos/LOGO-ALFA-CO.webp" alt="Alfaco" loading="lazy" /></div>
+            <div class="footer-logo-item"><img src="logos/LOGO-COSAPI.webp" alt="Cosapi" loading="lazy" /></div>
+            <div class="footer-logo-item"><img src="logos/LOGO-GRUPO-EFE.webp" alt="Grupo-efe" loading="lazy" /></div>
+            <div class="footer-logo-item"><img src="logos/LOGO-TAE.webp" alt="Tae" loading="lazy" /></div>
+            <div class="footer-logo-item"><img src="logos/LOGO_ALICISAC.png" alt="Alicisac" loading="lazy" /></div>
+            <div class="footer-logo-item"><img src="logos/LOGO_CONSECIÓN_VALLE.png" alt="Conseción" loading="lazy" /></div>
+          </div>
+        </div>
+
         <div class="footer-content">
           <div class="footer-section footer-about">
-            <h3>Acerca de Cajon</h3>
+            <a href="#inicio" class="footer-logo-link">
+              <img src="img/datavista-logo.png" alt="DataVista" width="160" />
+            </a>
             <p>
-              Somos una empresa especializada en desarrollo web y soluciones de
-              business intelligence. Transformamos ideas en experiencias
-              digitales excepcionales.
+              Especialistas en desarrollo web y soluciones de business
+              intelligence. Transformamos ideas en experiencias digitales.
             </p>
+            <div class="footer-social">
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
           </div>
 
           <div class="footer-section footer-links">
-            <h3>Enlaces Rápidos</h3>
+            <h3>Enlaces rápidos</h3>
             <ul>
-              <li>
-                <a href="#inicio"
-                  ><i class="fas fa-chevron-right"></i> Inicio</a
-                >
-              </li>
-              <li>
-                <a href="#servicios"
-                  ><i class="fas fa-chevron-right"></i> Servicios</a
-                >
-              </li>
-              <li>
-                <a href="#dashboards"
-                  ><i class="fas fa-chevron-right"></i> Dashboards</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Cajon"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><i class="fas fa-chevron-right"></i> Contacto</a
-                >
-              </li>
+              <li><a href="#inicio"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+              <li><a href="#servicios"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+              <li><a href="#dashboards"><i class="fas fa-chevron-right"></i> Dashboards</a></li>
+              <li><a href="#videos"><i class="fas fa-chevron-right"></i> Videos</a></li>
             </ul>
           </div>
 
           <div class="footer-section footer-contact">
             <h3>Contacto</h3>
             <a
-              href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20Cajon"
+              href="https://wa.me/51904612934?text=Hola,%20me%20interesan%20sus%20servicios%20de%20dashboards%20de%20DataVista"
               target="_blank"
               rel="noopener noreferrer"
-              ><i class="fas fa-phone"></i> +51 904612934</a
+              ><i class="fas fa-phone"></i> +51 904 612 934</a
             >
             <p><i class="fas fa-map-marker-alt"></i> Lima, Perú</p>
+            <p><i class="fas fa-envelope"></i> josep@cajondash.com</p>
           </div>
         </div>
 
         <div class="footer-bottom">
-          <p>&copy; 2026 Cajon. Todos los derechos reservados.</p>
+          <p>&copy; 2026 DataVista. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
-    <script src="js/js1.js"></script>
+
+    <script src="js/js1.js" defer></script>
   </body>
 </html>

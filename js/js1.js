@@ -1,562 +1,315 @@
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Sitio de Cajon cargado correctamente");
+document.addEventListener("DOMContentLoaded", () => {
+  /* HEADER SCROLL */
+  const header = document.getElementById("header");
+  if (header) {
+    const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
 
-  // Efecto de cambio de header al hacer scroll
-  window.addEventListener("scroll", function () {
-    const header = document.querySelector("header");
-    if (window.scrollY > 100) {
-      header.style.background = "rgba(255, 255, 255, 0.95)";
-      header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
-    } else {
-      header.style.background =
-        "linear-gradient(to right, #fff 80%, #f8f9fa 20%)";
-      header.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.08)";
-    }
-  });
-
-  // Smooth scrolling para todos los enlaces internos
+  /* SMOOTH SCROLL */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const href = this.getAttribute("href");
-      if (href === "#") return;
+    anchor.addEventListener("click", (e) => {
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+      const target = document.querySelector(href);
+      if (!target) return;
 
-      const targetElement = document.querySelector(href);
-      if (targetElement) {
-        e.preventDefault();
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
+      e.preventDefault();
+      const top =
+        target.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top, behavior: "smooth" });
     });
   });
 
-  // ===== FUNCIONALIDAD DEL MODAL DE IMÁGENES =====
+  /* MODAL IMÁGENES */
   const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("modalImage");
   const modalCaption = document.getElementById("modalCaption");
-  const closeBtn = document.querySelector(".close");
+  const closeBtn = modal?.querySelector(".close");
 
-  // Función para extraer la URL de la imagen del background
-  function extractBackgroundUrl(backgroundStyle) {
-    const match = backgroundStyle.match(/url\(["']?(.*?)["']?\)/);
-    return match ? match[1] : "";
-  }
+  const extractBg = (style) => {
+    const m = style.match(/url\(["']?(.*?)["']?\)/);
+    return m ? m[1] : "";
+  };
 
-  // Función para abrir el modal
-  function openModal(imageUrl, captionText) {
-    if (!imageUrl) return;
-
+  const openModal = (url, caption) => {
+    if (!modal || !url) return;
     modal.style.display = "flex";
-    setTimeout(() => {
-      modal.classList.add("show");
-    }, 10);
+    requestAnimationFrame(() => modal.classList.add("show"));
+    modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    modalImg.src = imageUrl;
-    modalCaption.textContent = captionText || "Dashboard Cajon";
-  }
+    modalImg.src = url;
+    modalCaption.textContent = caption || "Dashboard DataVista";
+    closeBtn?.focus();
+  };
 
-  // Función para cerrar el modal
-  function closeModal() {
+  const closeModal = () => {
+    if (!modal) return;
     modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
     setTimeout(() => {
       modal.style.display = "none";
       document.body.style.overflow = "";
     }, 300);
-  }
+  };
 
-  // Agregar evento a todas las imágenes del carrusel
-  document.querySelectorAll(".post-image").forEach((item) => {
-    item.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      let imageUrl = this.getAttribute("data-image");
-      if (!imageUrl) {
-        imageUrl = extractBackgroundUrl(this.style.backgroundImage);
-      }
-
-      const card = this.closest(".post-card");
-      const title =
-        card?.querySelector(".post-title")?.textContent || "Dashboard Cajon";
-
-      openModal(imageUrl, title);
+  document.querySelectorAll(".post-image").forEach((el) => {
+    el.addEventListener("click", () => {
+      const url = el.dataset.image || extractBg(el.style.backgroundImage);
+      const title = el.closest(".post-card")?.querySelector(".post-title")?.textContent;
+      openModal(url, title);
     });
   });
 
-  // Agregar evento a todos los botones "Ver imagen"
-  document.querySelectorAll(".view-image").forEach((item) => {
-    item.addEventListener("click", function (e) {
-      e.preventDefault();
+  document.querySelectorAll(".view-image").forEach((el) => {
+    el.addEventListener("click", (e) => {
       e.stopPropagation();
-
-      const card = this.closest(".post-card");
-      const imageElement = card.querySelector(".post-image");
-
-      let imageUrl = imageElement.getAttribute("data-image");
-      if (!imageUrl) {
-        imageUrl = extractBackgroundUrl(imageElement.style.backgroundImage);
-      }
-
-      const title = card.querySelector(".post-title").textContent;
-      openModal(imageUrl, title);
+      const card = el.closest(".post-card");
+      const img = card?.querySelector(".post-image");
+      if (!img) return;
+      const url = img.dataset.image || extractBg(img.style.backgroundImage);
+      openModal(url, card.querySelector(".post-title")?.textContent);
     });
   });
 
-  // Cerrar modal
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closeModal);
-  }
+  closeBtn?.addEventListener("click", closeModal);
 
-  // Cerrar modal al hacer clic fuera de la imagen
-  modal.addEventListener("click", function (e) {
+  modal?.addEventListener("click", (e) => {
     if (e.target === modal || e.target.classList.contains("modal-container")) {
       closeModal();
     }
   });
 
-  // Cerrar con tecla ESC
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.classList.contains("show")) {
-      closeModal();
-    }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal?.classList.contains("show")) closeModal();
   });
 
-  // ===== FUNCIONALIDAD DEL CARRUSEL =====
-  const carousel = document.querySelector(".carousel");
-  const cards = document.querySelectorAll(".post-card");
+  /* CARRUSEL DASHBOARDS */
+  const carousel = document.getElementById("dashboardsCarousel");
+  const cards = carousel ? Array.from(carousel.querySelectorAll(".post-card")) : [];
   const prevBtn = document.querySelector(".carousel-control.prev");
   const nextBtn = document.querySelector(".carousel-control.next");
   const dotsContainer = document.querySelector(".carousel-dots");
 
-  if (carousel && cards.length > 0 && prevBtn && nextBtn) {
+  if (carousel && cards.length && prevBtn && nextBtn) {
     let currentIndex = 0;
 
-    // Determinar cuántas tarjetas mostrar según el ancho de la pantalla
-    const cardsPerView = () => {
+    const perView = () => {
       if (window.innerWidth >= 992) return 3;
       if (window.innerWidth >= 768) return 2;
       return 1;
     };
 
-    // Calcular el ancho de cada tarjeta
-    const getCardWidth = () => {
-      const firstCard = cards[0];
-      const cardStyle = window.getComputedStyle(firstCard);
-      const marginLeft = parseFloat(cardStyle.marginLeft) || 0;
-      const marginRight = parseFloat(cardStyle.marginRight) || 0;
-      return firstCard.offsetWidth + marginLeft + marginRight;
+    const cardWidth = () => {
+      const s = getComputedStyle(cards[0]);
+      return cards[0].offsetWidth + (parseFloat(s.marginLeft) || 0) + (parseFloat(s.marginRight) || 0);
     };
 
-    // Crear dots para el carrusel
-    function createDots() {
+    const total = () => Math.max(1, cards.length - perView() + 1);
+
+    const renderDots = () => {
       if (!dotsContainer) return;
-
       dotsContainer.innerHTML = "";
-      const totalSlides = Math.ceil(cards.length / cardsPerView());
-
-      for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement("div");
-        dot.classList.add("dot");
-        if (i === currentIndex) dot.classList.add("active");
-        dot.addEventListener("click", () => goToSlide(i));
+      for (let i = 0; i < total(); i++) {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "dot" + (i === currentIndex ? " active" : "");
+        dot.setAttribute("aria-label", `Slide ${i + 1}`);
+        dot.addEventListener("click", () => goTo(i));
         dotsContainer.appendChild(dot);
       }
-    }
+    };
 
-    // Función para mover el carrusel
-    function goToSlide(index) {
-      const totalSlides = Math.ceil(cards.length / cardsPerView());
-      if (index < 0) index = totalSlides - 1;
-      if (index >= totalSlides) index = 0;
-
+    const goTo = (index) => {
+      const max = total() - 1;
+      if (index < 0) index = max;
+      if (index > max) index = 0;
       currentIndex = index;
-      const cardWidth = getCardWidth();
-      const cardsToShow = cardsPerView();
-      const translateX = -currentIndex * (cardWidth * cardsToShow);
-
-      carousel.style.transform = `translateX(${translateX}px)`;
-
-      // Actualizar dots activos
-      document.querySelectorAll(".dot").forEach((dot, i) => {
-        dot.classList.toggle("active", i === currentIndex);
+      carousel.style.transform = `translateX(${-currentIndex * cardWidth()}px)`;
+      dotsContainer?.querySelectorAll(".dot").forEach((d, i) => {
+        d.classList.toggle("active", i === currentIndex);
       });
-    }
+    };
 
-    // Event listeners para los controles
-    prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
-    nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+    prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
+    nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
 
-    // Inicializar carrusel
-    createDots();
-    goToSlide(0);
+    renderDots();
+    goTo(0);
 
-    // Ajustar carrusel en redimensionamiento
-    let resizeTimer;
+    let rt;
     window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        createDots();
-        goToSlide(currentIndex);
+      clearTimeout(rt);
+      rt = setTimeout(() => {
+        currentIndex = 0;
+        renderDots();
+        goTo(0);
       }, 250);
     });
   }
 
-  // ===== FORMULARIO DE CONTACTO =====
-  const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-
-      // Efecto de "enviando"
-      submitBtn.textContent = "Enviando...";
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = "0.7";
-
-      // Simular tiempo de envío
-      setTimeout(() => {
-        alert(
-          "✅ ¡Mensaje enviado con éxito!\n\nTe contactaremos dentro de las próximas 24 horas.",
-        );
-
-        contactForm.reset();
-
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = "1";
-
-        // Efecto visual
-        submitBtn.style.transform = "scale(1.05)";
-        setTimeout(() => {
-          submitBtn.style.transform = "scale(1)";
-        }, 300);
-      }, 2000);
+  /* CARRUSEL LOGOS — duplicar para loop infinito */
+  const logosTrack = document.getElementById("logosTrack");
+  if (logosTrack) {
+    const items = Array.from(logosTrack.children);
+    items.forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      logosTrack.appendChild(clone);
     });
   }
 
-  // Control de aparición del WhatsApp al hacer scroll
-  const whatsappBtn = document.getElementById("whatsappFloat");
-  if (whatsappBtn) {
-    window.addEventListener("scroll", function () {
-      const scrollPosition = window.scrollY;
-      if (scrollPosition > 300) {
-        whatsappBtn.classList.add("active");
-      } else {
-        whatsappBtn.classList.remove("active");
-      }
-    });
+  /* WHATSAPP */
+  const whatsapp = document.getElementById("whatsappFloat");
+  if (whatsapp) {
+    const toggle = () => whatsapp.classList.toggle("active", window.scrollY > 300);
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
   }
 
-  // ===== VIDEO GALLERY FUNCTIONALITY =====
+  /* VIDEOS */
   const videoCards = document.querySelectorAll(".video-card");
 
-  // Función para manejar la reproducción de videos
-  function setupVideoControls() {
+  const pauseOthers = (current) => {
     videoCards.forEach((card) => {
-      const wrapper = card.querySelector(".video-wrapper");
-      const video = card.querySelector(".video-player");
-      const playBtn = card.querySelector(".video-play-btn");
-
-      if (!video || !playBtn) return;
-
-      // Asegurar que los controles nativos estén deshabilitados
-      video.controls = false;
-
-      // Hacer que el video no sea clickeable directamente
-      video.style.pointerEvents = "none";
-
-      // Reproducir/Pausar al hacer clic en el botón
-      playBtn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        toggleVideo(video);
-      });
-
-      // También permitir clic en el wrapper
-      wrapper.addEventListener("click", function (e) {
-        // Si el clic no fue en el botón de expandir
-        if (
-          !e.target.closest(".view-fullscreen-btn") &&
-          !e.target.closest(".video-play-btn")
-        ) {
-          toggleVideo(video);
-        }
-      });
-
-      // Eventos del video
-      video.addEventListener("play", function () {
-        card.classList.add("playing");
-
-        // Pausar otros videos
-        videoCards.forEach((otherCard) => {
-          if (otherCard !== card) {
-            const otherVideo = otherCard.querySelector(".video-player");
-            if (otherVideo && !otherVideo.paused) {
-              otherVideo.pause();
-            }
-          }
-        });
-      });
-
-      video.addEventListener("pause", function () {
-        card.classList.remove("playing");
-      });
-
-      video.addEventListener("ended", function () {
-        card.classList.remove("playing");
-        video.currentTime = 0;
-      });
-
-      // Almacenar el tiempo actual para restaurarlo después
-      video.addEventListener("timeupdate", function () {
-        this._currentTime = this.currentTime;
-      });
+      if (card === current) return;
+      const v = card.querySelector(".video-player");
+      if (v && !v.paused) v.pause();
     });
-  }
+  };
 
-  function toggleVideo(video) {
-    if (video.paused) {
-      video.play().catch((e) => console.log("Error al reproducir:", e));
-    } else {
-      video.pause();
-    }
-  }
+  videoCards.forEach((card) => {
+    const wrapper = card.querySelector(".video-wrapper");
+    const video = card.querySelector(".video-player");
+    const playBtn = card.querySelector(".video-play-btn");
+    if (!video || !playBtn || !wrapper) return;
 
-  // ===== MODAL PARA VIDEOS =====
-  function setupVideoModal() {
-    // Crear modal si no existe
-    if (!document.querySelector(".video-modal")) {
-      const modalHTML = `
-      <div class="video-modal" id="videoModal">
-        <div class="video-modal-content">
-          <span class="close-video-modal">&times;</span>
-          <video controls id="modalVideo"></video>
-        </div>
-      </div>
-    `;
-      document.body.insertAdjacentHTML("beforeend", modalHTML);
-    }
-
-    const videoModal = document.getElementById("videoModal");
-    const modalVideo = document.getElementById("modalVideo");
-    const closeModal = document.querySelector(".close-video-modal");
-
-    if (!videoModal || !modalVideo) return;
-
-    // Variable para almacenar el video original que se está mostrando en el modal
-    let originalVideo = null;
-
-    // Variable para controlar si el video original estaba reproduciéndose
-    let wasVideoPlaying = false;
-
-    // Función para abrir modal
-    function openVideoModal(videoElement) {
-      // Guardar referencia al video original
-      originalVideo = videoElement;
-
-      // Verificar si el video original está reproduciéndose
-      wasVideoPlaying = !videoElement.paused;
-
-      // Si estaba reproduciéndose, pausarlo para evitar doble audio
-      if (wasVideoPlaying) {
-        videoElement.pause();
+    const toggleVideo = () => {
+      if (video.paused) {
+        pauseOthers(card);
+        video.play().catch(() => {});
+      } else {
+        video.pause();
       }
+    };
 
-      // Obtener la fuente del video
-      const source = videoElement.querySelector("source");
-      const videoSrc = source ? source.src : videoElement.src;
-      const posterSrc = videoElement.poster;
-      const currentTime = videoElement.currentTime;
-
-      if (!videoSrc) return;
-
-      // Configurar modal
-      modalVideo.src = videoSrc;
-      modalVideo.poster = posterSrc;
-      modalVideo.currentTime = currentTime;
-      videoModal.classList.add("show");
-      document.body.style.overflow = "hidden";
-
-      // Reproducir en modal si el original estaba reproduciéndose
-      if (wasVideoPlaying) {
-        // Pequeño retraso para asegurar que el modal esté listo
-        setTimeout(() => {
-          modalVideo
-            .play()
-            .catch((e) => console.log("Error al reproducir modal:", e));
-        }, 100);
-      }
-    }
-
-    // Función para cerrar modal
-    function closeVideoModal() {
-      const currentTime = modalVideo.currentTime;
-      const wasModalPlaying = !modalVideo.paused;
-
-      // Pausar el video del modal
-      modalVideo.pause();
-
-      videoModal.classList.remove("show");
-      modalVideo.src = "";
-      document.body.style.overflow = "";
-
-      // Restaurar el tiempo en el video original si existe
-      if (originalVideo) {
-        originalVideo.currentTime = currentTime;
-
-        // Si el modal estaba reproduciéndose y el original no está en pausa,
-        // restaurar la reproducción en el video original
-        if (wasModalPlaying && originalVideo.paused) {
-          originalVideo
-            .play()
-            .catch((e) => console.log("Error al reanudar video:", e));
-        }
-
-        // Limpiar la referencia
-        originalVideo = null;
-      }
-    }
-
-    // Agregar botón de expandir a cada tarjeta
-    videoCards.forEach((card) => {
-      if (!card.querySelector(".view-fullscreen-btn")) {
-        const viewBtn = document.createElement("button");
-        viewBtn.className = "view-fullscreen-btn";
-        viewBtn.innerHTML = '<i class="fas fa-expand"></i>';
-        viewBtn.setAttribute("aria-label", "Ver pantalla completa");
-
-        const wrapper = card.querySelector(".video-wrapper");
-        if (wrapper) {
-          wrapper.appendChild(viewBtn);
-
-          viewBtn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            const video = card.querySelector(".video-player");
-            if (video) {
-              openVideoModal(video);
-            }
-          });
-        }
-      }
-    });
-
-    // Event listeners del modal
-    if (closeModal) {
-      closeModal.addEventListener("click", closeVideoModal);
-    }
-
-    videoModal.addEventListener("click", function (e) {
-      if (e.target === videoModal) {
-        closeVideoModal();
-      }
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && videoModal.classList.contains("show")) {
-        closeVideoModal();
-      }
-    });
-
-    modalVideo.addEventListener("click", function (e) {
+    playBtn.addEventListener("click", (e) => {
       e.stopPropagation();
+      toggleVideo();
     });
+
+    wrapper.addEventListener("click", (e) => {
+      if (e.target.closest(".view-fullscreen-btn")) return;
+      if (e.target.closest(".video-play-btn")) return;
+      toggleVideo();
+    });
+
+    video.addEventListener("play", () => card.classList.add("playing"));
+    video.addEventListener("pause", () => card.classList.remove("playing"));
+    video.addEventListener("ended", () => {
+      card.classList.remove("playing");
+      video.currentTime = 0;
+    });
+  });
+
+  /* MODAL VIDEO */
+  if (!document.querySelector(".video-modal")) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class="video-modal" id="videoModal" role="dialog" aria-modal="true">
+        <div class="video-modal-content">
+          <span class="close-video-modal" role="button" tabindex="0" aria-label="Cerrar">&times;</span>
+          <video controls id="modalVideo" playsinline></video>
+        </div>
+      </div>`
+    );
   }
 
-  // ===== HERO BACKGROUND SLIDESHOW =====
-  function setupHeroSlideshow() {
-    const hero = document.querySelector(".hero");
-    if (!hero) return;
+  const videoModal = document.getElementById("videoModal");
+  const modalVideo = document.getElementById("modalVideo");
+  const closeVideoBtn = document.querySelector(".close-video-modal");
+  let originalVideo = null;
+  let wasPlaying = false;
 
-    // Crear contenedor para las capas de imágenes
-    const slideshowContainer = document.createElement("div");
-    slideshowContainer.className = "hero-slideshow";
-    slideshowContainer.style.cssText = `
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: hidden;
-  `;
+  const openVideoModal = (videoEl) => {
+    originalVideo = videoEl;
+    wasPlaying = !videoEl.paused;
+    if (wasPlaying) videoEl.pause();
 
-    // Insertar el contenedor al inicio del hero
-    hero.appendChild(slideshowContainer);
+    const source = videoEl.querySelector("source");
+    const src = source ? source.src : videoEl.src;
+    if (!src) return;
 
-    const images = ["img/opcion_a.png", "img/opcion_b.png"];
+    modalVideo.src = src;
+    modalVideo.poster = videoEl.poster || "";
+    modalVideo.currentTime = videoEl.currentTime || 0;
+    videoModal.classList.add("show");
+    document.body.style.overflow = "hidden";
 
-    // Crear capas para cada imagen - SIN Z-INDEX
-    const layers = images.map((src, index) => {
-      const layer = document.createElement("div");
-      layer.className = `hero-layer ${index === 0 ? "active" : ""}`;
-      layer.style.cssText = `
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('${src}');
-    background-size: cover;
-    background-position: center;
-    opacity: ${index === 0 ? 1 : 0};
-    transition: opacity 1.5s ease-in-out;
-    /* Z-INDEX ELIMINADO */
-  `;
-      slideshowContainer.appendChild(layer);
-      return layer;
-    });
-
-    // Añadir overlay oscuro - SIN Z-INDEX
-    const overlay = document.createElement("div");
-    overlay.style.cssText = `
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%);
-  /* Z-INDEX ELIMINADO */
-  pointer-events: none;
-`;
-    slideshowContainer.appendChild(overlay);
-
-    let currentIndex = 0;
-
-    function changeHeroImage() {
-      const nextIndex = (currentIndex + 1) % images.length;
-
-      // Capa actual se desvanece
-      layers[currentIndex].style.opacity = "0";
-      // Siguiente capa aparece
-      layers[nextIndex].style.opacity = "1";
-
-      currentIndex = nextIndex;
+    if (wasPlaying) {
+      setTimeout(() => modalVideo.play().catch(() => {}), 100);
     }
+  };
 
-    // Cambiar cada 5 segundos
-    setInterval(changeHeroImage, 5000);
-  }
+  const closeVideoModal = () => {
+    const time = modalVideo.currentTime;
+    const wasModalPlaying = !modalVideo.paused;
+    modalVideo.pause();
+    videoModal.classList.remove("show");
+    modalVideo.removeAttribute("src");
+    modalVideo.load();
+    document.body.style.overflow = "";
 
-  // Retrasar el slideshow para que no interfiera con los videos
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      setupVideoControls();
-      setupVideoModal();
-      // El slideshow se inicia después que todo lo demás esté estable
-      setTimeout(setupHeroSlideshow, 300);
+    if (originalVideo) {
+      originalVideo.currentTime = time;
+      if (wasModalPlaying && originalVideo.paused) {
+        originalVideo.play().catch(() => {});
+      }
+      originalVideo = null;
+    }
+  };
+
+  videoCards.forEach((card) => {
+    if (card.querySelector(".view-fullscreen-btn")) return;
+    const wrapper = card.querySelector(".video-wrapper");
+    if (!wrapper) return;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "view-fullscreen-btn";
+    btn.setAttribute("aria-label", "Ver en pantalla completa");
+    btn.innerHTML = '<i class="fas fa-expand"></i>';
+    wrapper.appendChild(btn);
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const video = card.querySelector(".video-player");
+      if (video) openVideoModal(video);
     });
-  } else {
-    setupVideoControls();
-    setupVideoModal();
-    setTimeout(setupHeroSlideshow, 300);
+  });
+
+  closeVideoBtn?.addEventListener("click", closeVideoModal);
+
+  videoModal?.addEventListener("click", (e) => {
+    if (e.target === videoModal) closeVideoModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && videoModal?.classList.contains("show")) closeVideoModal();
+  });
+
+  modalVideo?.addEventListener("click", (e) => e.stopPropagation());
+
+  /* HERO SLIDESHOW */
+  const heroLayers = document.querySelectorAll(".hero-layer");
+  if (heroLayers.length > 1) {
+    let idx = 0;
+    setInterval(() => {
+      heroLayers[idx].classList.remove("active");
+      idx = (idx + 1) % heroLayers.length;
+      heroLayers[idx].classList.add("active");
+    }, 5000);
   }
 });
